@@ -1,19 +1,9 @@
 import React from "react";
 import Lights from "../components/Lights";
-import { useThree } from "react-three-fiber";
+
 import Wall from "../components/Wall";
 
 function Scene() {
-  const { camera } = useThree();
-
-  camera.fov = 45;
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.near = 0.1;
-  camera.far = 1;
-
-  // camera.up.set(0, 0, 1);
-  camera.position.set(0, 0, 199);
-
   return (
     <>
       <Lights

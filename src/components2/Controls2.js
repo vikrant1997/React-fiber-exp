@@ -6,16 +6,12 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 extend({ OrbitControls });
 
-function Controls() {
+function Controls2() {
   const controlsRef = useRef();
-  const { camera, gl } = useThree();
-  camera.fov = 45;
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.near = 0.1;
-  camera.far = 1;
 
-  // camera.up.set(0, 0, 1);
-  camera.position.set(0, 0, 800);
+  const { camera, gl } = useThree();
+
+  camera.position.set(0, 0, 3);
 
   useFrame(() => controlsRef.current && controlsRef.current.update());
 
@@ -28,14 +24,14 @@ function Controls() {
       minZoom={10}
       //   enableRotate={false}
       enablePan={false}
-      maxDistance={200}
-      minDistance={0}
-      minPolarAngle={0}
-      maxPolarAngle={Math.PI / 2}
+      //   maxDistance={200}
+      //   minDistance={0}
+      //   minPolarAngle={0}
+      //   maxPolarAngle={Math.PI / 2}
       //   minAzimuthAngle={0}
       //   maxAzimuthAngle={0}
     />
   );
 }
 
-export default Controls;
+export default Controls2;
