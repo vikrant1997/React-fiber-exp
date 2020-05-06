@@ -1,8 +1,8 @@
 import React from "react";
 import Lights from "../components/Lights";
 import { useThree } from "react-three-fiber";
-import PoolTable from "../components/PoolTable";
 import Wall from "../components/Wall";
+
 function Scene() {
   const { camera } = useThree();
 
@@ -11,16 +11,10 @@ function Scene() {
   camera.near = 0.1;
   camera.far = 1;
 
-  camera.up.set(0, 0, 1);
-  camera.position.set(-25, 0, 0);
+  // camera.up.set(0, 0, 1);
+  camera.position.set(0, 0, 199);
 
   return (
-    // <mesh>
-
-    //   <boxBufferGeometry attach="geometry" args={[2, 2, 2]} />
-    //   <meshNormalMaterial attach="material" />
-    // </mesh>
-
     <>
       <Lights
         type="AmbientLight"
@@ -39,8 +33,8 @@ function Scene() {
         />
       ))}
       <React.Suspense fallback={<mesh />}>
-        <mesh>
-          <boxBufferGeometry attach="geometry" args={[2, 2, 2]} />
+        <mesh position={[0, -180, 0]}>
+          <boxBufferGeometry attach="geometry" args={[20, 20, 20]} />
           <meshNormalMaterial attach="material" />
         </mesh>
         {/* <PoolTable /> */}

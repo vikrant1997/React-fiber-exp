@@ -16,12 +16,17 @@ function Controls() {
     <orbitControls
       ref={controlsRef}
       args={[camera, gl.domElement]}
-      enableRotate
+      enableZoom={true}
+      maxZoom={0}
+      minZoom={10}
+      //   enableRotate={false}
       enablePan={false}
-      maxDistance={100}
-      minDistance={5}
-      //   minPolarAngle={Math.PI / 6}
-      //   maxPolarAngle={Math.PI / 2}
+      maxDistance={200}
+      minDistance={0}
+      minPolarAngle={0}
+      maxPolarAngle={Math.PI / 2}
+      //   minAzimuthAngle={0}
+      //   maxAzimuthAngle={0}
     />
   );
 }
