@@ -26,7 +26,7 @@ function Scene() {
         <mesh position={[0, -180, 0]}>
           <boxBufferGeometry attach="geometry" args={[20, 20, 20]} />
           <meshNormalMaterial attach="material" />
-        </mesh>
+        </mesh>{" "}
         {/* <PoolTable /> */}
         <Wall />
       </React.Suspense>

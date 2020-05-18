@@ -15,7 +15,7 @@ function Controls() {
   camera.far = 1;
 
   // camera.up.set(0, 0, 1);
-  camera.position.set(0, 0, 800);
+  camera.position.set(0, 0, 100);
 
   useFrame(() => controlsRef.current && controlsRef.current.update());
 
