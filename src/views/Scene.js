@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Lights from "../components/Lights";
 import { useThree, useFrame } from "react-three-fiber";
-import Wall from "../components/Wall";
+import Room from "../components/Room";
 import { Color } from "three";
 import * as THREE from "three";
 
@@ -44,7 +44,7 @@ function Scene() {
           <meshNormalMaterial attach="material" />
         </mesh>
 
-        <Wall />
+        <Room />
       </React.Suspense>
     </>
     // </mesh>

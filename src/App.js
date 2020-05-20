@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Canvas } from "react-three-fiber";
-
+import "./App.css";
 import Scene from "./views/Scene";
 import Controls from "./components/Controls";
 
@@ -13,19 +13,21 @@ function App() {
   var canJump = false;
   return (
     <>
-      <div
-        style={{
-          height: "100px",
-          width: "100px",
-          position: "fixed",
-          zIndex: "10",
-          backgroundColor: "white",
-          left: "10px",
-          bottom: "10px",
-        }}
-      >
-        "HEY"
+      <div className="controls">
+        <button id="leftButton" className="button">
+          Left
+        </button>
+        <button id="rightButton" className="button">
+          Right
+        </button>
+        <button id="zoomButton" className="button">
+          Zoom In
+        </button>
+        <button id="zoomOutButton" className="button">
+          Zoom Out
+        </button>
       </div>
+
       <Canvas>
         <Scene />
         <Controls
