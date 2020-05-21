@@ -1,10 +1,10 @@
 import React from "react";
 
-function Wall({ length, breadth, height, texture }) {
+function Wall({ length, breadth, height, texture, receiveShadow, castShadow }) {
   return (
-    <mesh receiveShadow>
+    <mesh receiveShadow={receiveShadow} castShadow={castShadow}>
       <boxGeometry attach="geometry" args={[length, breadth, height]} />
-      <meshStandardMaterial
+      <meshLambertMaterial
         attach="material"
         // opacity={0}
         roughness={0.4}

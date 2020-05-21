@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Lights from "../components/Lights";
 import { useThree, useFrame } from "react-three-fiber";
 import Room from "../components/Room";
@@ -9,41 +9,53 @@ function Scene() {
   const { scene } = useThree();
   scene.background = new Color("lightblue");
 
+  const light = useRef();
+  useEffect(() => {
+    light.current.castShadow = true;
+    light.current.shadow.camera.visible = false;
+    light.current.shadow.camera.far = 500;
+    light.current.shadow.camera.right = 200;
+    light.current.shadow.camera.left = -200;
+    light.current.shadow.camera.top = 110;
+    light.current.target.position.set(100, 0, 0);
+    light.current.shadow.camera.bottom = -50;
+
+    scene.add(light.current.target);
+    //comment this if helper not required
+    // scene.add(new THREE.CameraHelper(light.current.shadow.camera));
+
+    // console.log(light.current.shadow.mapSize);
+    // console.log(light.current.target.position);
+  }, []);
+  //comment this if helper not required
+  // scene.add(new THREE.CameraHelper(camera));
+
   return (
     <>
-      <Lights
-        type="AmbientLight"
-        color={0xffffff}
-        intensity={1}
-        position={[0, 200, 0]}
-      />
-      {[[-150, 20, 0], [100, 12, 0], [0, 12, -100], [(0, 12, 100)]].map(
-        (pos) => (
-          <Lights
-            type="PointLight"
-            color={0xffffff}
-            intensity={1}
-            distance={100}
-            position={pos}
-            castShadow
-            key={pos}
-          />
-        )
-      )}
-      <Lights
-        position={[0, 100, 0]}
-        type="PointLight"
-        color={0xffffff}
-        intensity={1}
-        distance={100}
-        castShadow
-      />
-      <React.Suspense fallback={<mesh />}>
-        <mesh position={[0, 2, 0]}>
-          <boxBufferGeometry attach="geometry" args={[2, 2, 2]} />
-          <meshNormalMaterial attach="material" />
-        </mesh>
+      <directionalLight
+        ref={light}
+        intensity={2}
+        position={[-300, 200, 0]}
+        visible={true}
+        // castShadow={true}
 
+        // target={Room}
+      />
+      <ambientLight intensity={0.5} position={[0, 200, 0]} />
+
+      <React.Suspense fallback={<mesh />}>
+        <mesh position={[0, 13, 0]} receiveShadow={true} castShadow={true}>
+          <boxBufferGeometry attach="geometry" args={[2, 25, 25]} />
+          <meshPhongMaterial attach="material" />
+        </mesh>
+        <mesh position={[20, 13, -150]} receiveShadow={true} castShadow={true}>
+          <boxBufferGeometry attach="geometry" args={[2, 25, 25]} />
+          <meshPhongMaterial attach="material" />
+        </mesh>
+        <mesh position={[-20, 13, 150]} receiveShadow={true} castShadow={true}>
+          <boxBufferGeometry attach="geometry" args={[2, 25, 25]} />
+          <meshPhongMaterial attach="material" />
+        </mesh>
         <Room />
       </React.Suspense>
     </>
@@ -51,41 +63,4 @@ function Scene() {
   );
 }
 
-// function Scene() {
-//   const { camera } = useThree();
-
-//   camera.fov = 45;
-//   camera.aspect = window.innerWidth / window.innerHeight;
-//   camera.near = 0.1;
-//   camera.far = 1000;
-
-//   camera.up.set(0, 0, 1);
-//   camera.position.set(-5, 7, 5);
-
-//   return (
-//     <>
-//       <Lights
-//         type="AmbientLight"
-//         color={0xffffff}
-//         intensity={0.2}
-//         position={[0, 0, 0]}
-//       />
-//       {[
-//         [-5, -12, 20],
-//         [5, -12, 20],
-//         [-5, 12, 20],
-//         [5, 12, 20],
-//       ].map((pos) => (
-//         <Lights
-//           type="PointLight"
-//           color={0xffffff}
-//           intensity={0.4}
-//           distance={100}
-//           position={pos}
-//           castShadow
-//         />
-//       ))}
-//     </>
-//   );
-// }
 export default Scene;

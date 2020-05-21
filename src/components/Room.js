@@ -47,11 +47,20 @@ function Room() {
           breadth={0}
           height={wallHeight}
           texture={roofTexture}
+          castShadow={false}
+          receiveShadow={true}
         />
       </object3D>
       {/* bottom grass */}
       <object3D position={[0, -0.1, 0]} rotation={[0, 0, 0]}>
-        <Wall length={1000} breadth={0} height={1000} texture={grassTexture} />
+        <Wall
+          length={1000}
+          breadth={0}
+          height={1000}
+          texture={grassTexture}
+          castShadow={false}
+          receiveShadow={true}
+        />
       </object3D>
       {/* bottom wall */}
       <object3D position={[0, 0, 0]}>
@@ -60,6 +69,8 @@ function Room() {
           breadth={0}
           height={wallHeight}
           texture={floorTexture}
+          castShadow={false}
+          receiveShadow={true}
         />
       </object3D>
       {/* left wall */}
@@ -78,6 +89,8 @@ function Room() {
           breadth={wallHeight / 4}
           height={wallHeight}
           texture={wallTexture}
+          castShadow={true}
+          receiveShadow={false}
         />
 
         {/* top wall */}
@@ -91,6 +104,8 @@ function Room() {
           breadth={wallHeight / 4}
           height={0}
           texture={wallTexture}
+          castShadow={true}
+          receiveShadow={false}
         />
       </object3D>
       {/* front wall */}
@@ -100,6 +115,8 @@ function Room() {
           breadth={wallHeight / 4}
           height={0}
           texture={wallTexture}
+          castShadow={true}
+          receiveShadow={false}
         />
       </object3D>
     </>

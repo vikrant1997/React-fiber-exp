@@ -6,11 +6,6 @@ import Scene from "./views/Scene";
 import Controls from "./components/Controls";
 
 function App() {
-  var moveForward = false;
-  var moveBackward = false;
-  var moveLeft = false;
-  var moveRight = false;
-  var canJump = false;
   return (
     <>
       <div className="controls">
@@ -28,14 +23,9 @@ function App() {
         </button>
       </div>
 
-      <Canvas>
+      <Canvas shadowMap={{ enabled: "true" }}>
         <Scene />
-        <Controls
-          moveForward={moveForward}
-          moveBackward={moveBackward}
-          moveLeft={moveLeft}
-          moveRight={moveRight}
-        />
+        <Controls />
       </Canvas>
     </>
   );
