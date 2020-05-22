@@ -33,7 +33,7 @@ export default function Bird2(props) {
   }, []);
 
   useFrame((state, delta) => {
-    group.current.rotation.y += 0.01;
+    // group.current.rotation.y += 0.01;
     // Math.sin((delta * factor) / 2) * Math.cos((delta * factor) / 2) * 1.5;
     mixer.update(delta);
   });

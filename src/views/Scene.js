@@ -7,6 +7,7 @@ import * as THREE from "three";
 import Bird from "../components/Bird";
 import Bird2 from "../components/Bird2";
 import url from "../assets/flamingo.glb";
+import Car from "../components/Car";
 
 function Scene() {
   const { scene, camera } = useThree();
@@ -59,6 +60,7 @@ function Scene() {
         <Room />
         {/* <Bird position={[0, 50, 150]} speed={1} factor={0.5} url={url} /> */}
         <Bird2 position={[-150, 50, 0]} />
+        <Car position={[150, 0, 150]} />
       </React.Suspense>
     </>
     // </mesh>

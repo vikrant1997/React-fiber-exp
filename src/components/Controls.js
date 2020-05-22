@@ -27,11 +27,11 @@ function Controls({
     gl: { domElement },
     setDefaultCamera,
     scene,
-    clock,
+    // clock,
   } = useThree();
   const controlsRef = useRef();
-  const firstPersonControlsRef = useRef();
-  // var clock = new THREE.Clock();
+  // const firstPersonControlsRef = useRef();
+  var clock = new THREE.Clock();
   useEffect(() => {
     clock.start();
     camera.position.set(0, 10, 100);
@@ -55,10 +55,12 @@ function Controls({
       }
     }
     if (moveLeft) {
-      camera.position.x -= 10;
+      // camera.position.x -= 10;
+      camera.translateX(-10);
     }
     if (moveRight) {
-      camera.position.x += 10;
+      // camera.position.x += 10;
+      camera.translateX(10);
       // camera.translateY(10);
     }
     if (moveIn) {
@@ -77,9 +79,9 @@ function Controls({
 
     camera.updateProjectionMatrix();
     // console.log(clock.getDelta());
-    console.log(clock.getDelta());
+    // console.log(clock.getDelta());
 
-    // firstPersonControlsRef.current.update(clock.getDelta() * 150);
+    // firstPersonControlsRef.current.update(clock.getDelta() * 300);
     controlsRef.current.update();
   });
 
@@ -91,14 +93,14 @@ function Controls({
         args={[camera, domElement]}
         activeLook={true}
         // autoForward={true}
-        // constrainVertical={true}
+        constrainVertical={true}
         // heightMax={0.1}
-        lookSpeed={0.05}
+        lookSpeed={0.01}
         movementSpeed={70}
         noFly={true}
-        // verticalMax={Math.PI / 2}
-        // vericalMin={Math.PI / 2}
-        // lookVertical={true}
+        verticalMax={Math.PI / 2}
+        vericalMin={Math.PI / 2}
+        lookVertical={true}
       /> */}
       <orbitControls
         ref={controlsRef}
