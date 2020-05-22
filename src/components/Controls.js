@@ -3,115 +3,119 @@ import React, { useRef, useEffect } from "react";
 import { extend, useThree, useFrame } from "react-three-fiber";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import initialiseListeners from "../utils/listeners";
 import * as THREE from "three";
 
-extend({ OrbitControls });
+extend({ OrbitControls, PointerLockControls, FirstPersonControls });
 
-function Controls() {
+function Controls({
+  zoomIn,
+  moveIn,
+  moveOut,
+  moveTop,
+  moveDown,
+  moveLeft,
+  moveRight,
+  zoomOut,
+}) {
+  console.log("controls render");
+
   const {
     camera,
     gl: { domElement },
     setDefaultCamera,
+    scene,
+    clock,
   } = useThree();
-
+  const controlsRef = useRef();
+  const firstPersonControlsRef = useRef();
+  // var clock = new THREE.Clock();
   useEffect(() => {
-    console.log(camera.isOrthographicCamera);
-    console.log(camera.isPerspectiveCamera);
-
-    console.log(camera.fov);
-
+    clock.start();
     camera.position.set(0, 10, 100);
     camera.far = 20000;
+    console.log(camera.fov);
 
     setDefaultCamera(camera);
+    // controlsRef.current.target.set(0, 100, 100);
+    // controlsRef.current.center = new THREE.Vector3(0, 100, 100);
   }, []);
-
-  var zoomIn = false;
-  var zoomOut = false;
-  var moveLeft = false;
-  var moveRight = false;
-
-  const controlsRef = useRef();
-
-  // function Events(zoomIn,zoomOut,moveLeft,moveRight);
-
-  function startZoomIn(event) {
-    console.log(camera.type);
-
-    console.log(event);
-    zoomIn = true;
-  }
-  function stopZoomIn(event) {
-    zoomIn = false;
-  }
-  function startZoomOut(event) {
-    zoomOut = true;
-  }
-  function stopZoomOut(event) {
-    zoomOut = false;
-  }
-
-  function startLeft(event) {
-    console.log("startingLeft");
-    moveLeft = true;
-  }
-  function stopLeft(event) {
-    console.log("startingLeft");
-    moveLeft = false;
-  }
-  function startRight(event) {
-    moveRight = true;
-  }
-  function stopRight(event) {
-    console.log("startingLeft");
-    moveRight = false;
-  }
-  initialiseListeners(
-    startZoomIn,
-    stopZoomIn,
-    startZoomOut,
-    stopZoomOut,
-    startLeft,
-    stopLeft,
-    startRight,
-    stopRight
-  );
 
   useFrame(() => {
     if (zoomIn) {
-      camera.fov -= 1;
+      if (camera.fov > 10) {
+        camera.fov -= 1;
+      }
     }
     if (zoomOut) {
-      camera.fov += 1;
+      if (camera.fov < 90) {
+        camera.fov += 1;
+      }
     }
     if (moveLeft) {
       camera.position.x -= 10;
     }
     if (moveRight) {
       camera.position.x += 10;
+      // camera.translateY(10);
     }
+    if (moveIn) {
+      camera.position.z -= 10;
+    }
+    if (moveOut) {
+      camera.position.z += 10;
+    }
+    if (moveTop) {
+      camera.position.y += 10;
+    }
+
+    if (moveDown) {
+      camera.position.y -= 10;
+    }
+
     camera.updateProjectionMatrix();
+    // console.log(clock.getDelta());
+    console.log(clock.getDelta());
+
+    // firstPersonControlsRef.current.update(clock.getDelta() * 150);
     controlsRef.current.update();
   });
 
   // return <></>;
   return (
-    <orbitControls
-      ref={controlsRef}
-      args={[camera, domElement]}
-      enableZoom={true}
-      maxZoom={100}
-      minZoom={10}
-      enablePan={true}
-      maxDistance={1000}
-      minPolarAngle={0}
-      maxPolarAngle={Math.PI / 2}
-      zoomSpeed={0.5}
-      enableDamping={true}
-      screenSpacePanning={false}
-      keyPanSpeed={40}
-    />
+    <>
+      {/* <firstPersonControls
+        ref={firstPersonControlsRef}
+        args={[camera, domElement]}
+        activeLook={true}
+        // autoForward={true}
+        // constrainVertical={true}
+        // heightMax={0.1}
+        lookSpeed={0.05}
+        movementSpeed={70}
+        noFly={true}
+        // verticalMax={Math.PI / 2}
+        // vericalMin={Math.PI / 2}
+        // lookVertical={true}
+      /> */}
+      <orbitControls
+        ref={controlsRef}
+        args={[camera, domElement]}
+        enableZoom={true}
+        maxZoom={100}
+        minZoom={10}
+        // enablePan={true}
+        maxDistance={1000}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
+        zoomSpeed={0.5}
+        enableDamping={true}
+        screenSpacePanning={true}
+        keyPanSpeed={40}
+      />
+    </>
   );
 }
 

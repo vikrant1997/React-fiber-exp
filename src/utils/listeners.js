@@ -1,6 +1,6 @@
 function initialiseListeners(
-  startZoomIn,
-  stopZoomIn,
+  // startZoomIn,
+  // stopZoomIn,
   startZoomOut,
   stopZoomOut,
   startLeft,
@@ -8,12 +8,12 @@ function initialiseListeners(
   startRight,
   stopRight
 ) {
-  document
-    .getElementById("zoomButton")
-    .addEventListener("mousedown", startZoomIn, false);
-  document
-    .getElementById("zoomButton")
-    .addEventListener("mouseup", stopZoomIn, false);
+  // document
+  //   .getElementById("zoomButton")
+  //   .addEventListener("mousedown", startZoomIn, false);
+  // document
+  //   .getElementById("zoomButton")
+  //   .addEventListener("mouseup", stopZoomIn, false);
   document
     .getElementById("zoomOutButton")
     .addEventListener("mousedown", startZoomOut, false);

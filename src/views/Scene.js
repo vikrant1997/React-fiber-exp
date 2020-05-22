@@ -1,12 +1,15 @@
 import React, { useRef, useEffect } from "react";
 import Lights from "../components/Lights";
-import { useThree, useFrame } from "react-three-fiber";
+import { useThree, useFrame, useLoader } from "react-three-fiber";
 import Room from "../components/Room";
 import { Color } from "three";
 import * as THREE from "three";
+import Bird from "../components/Bird";
+import Bird2 from "../components/Bird2";
+import url from "../assets/flamingo.glb";
 
 function Scene() {
-  const { scene } = useThree();
+  const { scene, camera } = useThree();
   scene.background = new Color("lightblue");
 
   const light = useRef();
@@ -18,14 +21,11 @@ function Scene() {
     light.current.shadow.camera.left = -200;
     light.current.shadow.camera.top = 110;
     light.current.target.position.set(100, 0, 0);
-    light.current.shadow.camera.bottom = -50;
+    light.current.shadow.camera.bottom = -100;
 
     scene.add(light.current.target);
     //comment this if helper not required
-    // scene.add(new THREE.CameraHelper(light.current.shadow.camera));
-
-    // console.log(light.current.shadow.mapSize);
-    // console.log(light.current.target.position);
+    scene.add(new THREE.CameraHelper(light.current.shadow.camera));
   }, []);
   //comment this if helper not required
   // scene.add(new THREE.CameraHelper(camera));
@@ -57,6 +57,8 @@ function Scene() {
           <meshPhongMaterial attach="material" />
         </mesh>
         <Room />
+        {/* <Bird position={[0, 50, 150]} speed={1} factor={0.5} url={url} /> */}
+        <Bird2 position={[-150, 50, 0]} />
       </React.Suspense>
     </>
     // </mesh>
