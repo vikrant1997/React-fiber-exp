@@ -10,10 +10,14 @@ function App() {
   const [moveRight, setmoveRight] = useState(false);
   const [zoomIn, setZoomIn] = useState(false);
   const [zoomOut, setZoomOut] = useState(false);
-  const [moveIn, setmoveIn] = useState(false);
+  const [moveForward, setmoveForward] = useState(false);
   const [moveOut, setmoveOut] = useState(false);
   const [moveTop, setmoveTop] = useState(false);
   const [moveDown, setmoveDown] = useState(false);
+  // const [mouseLook, setmouseLook] = useState(false);
+  const [pointerLock, setPointerLock] = useState(false);
+  const [fPControl, setFpControl] = useState(false);
+  const [oPControl, setOpControl] = useState(true);
 
   return (
     <>
@@ -46,8 +50,8 @@ function App() {
         </button>
 
         <button
-          onMouseDown={() => setmoveIn(true)}
-          onMouseUp={() => setmoveIn(false)}
+          onMouseDown={() => setmoveForward(true)}
+          onMouseUp={() => setmoveForward(false)}
         >
           Forward
         </button>
@@ -70,19 +74,49 @@ function App() {
         >
           Zoom Out
         </button>
+        <button
+          onClick={() => {
+            setFpControl(true);
+            setOpControl(false);
+          }}
+        >
+          FpControl
+        </button>
+        <button
+          onClick={() => {
+            setOpControl(true);
+            setFpControl(false);
+          }}
+        >
+          OpControl
+        </button>
+        {/* <button
+          onMouseDown={() => setmouseLook(true)}
+          onMouseUp={() => setmouseLook(false)}
+        >
+          Disable Mouse
+        </button> */}
+        {/* <button onClick={() => setPointerLock(!pointerLock)}>GameMode</button> */}
       </div>
 
-      <Canvas shadowMap={{ enabled: "true" }}>
+      <Canvas
+        shadowMap={{ enabled: "true" }}
+        onClick={() => setPointerLock(!pointerLock)}
+      >
         <Scene />
         <Controls
           moveLeft={moveLeft}
           moveRight={moveRight}
           zoomIn={zoomIn}
           zoomOut={zoomOut}
-          moveIn={moveIn}
+          moveForward={moveForward}
           moveOut={moveOut}
           moveTop={moveTop}
           moveDown={moveDown}
+          // mouseLook={mouseLook}
+          pointerLock={pointerLock}
+          fPControl={fPControl}
+          oPControl={oPControl}
         />
       </Canvas>
     </>
