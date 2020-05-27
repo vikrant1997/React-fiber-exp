@@ -4,20 +4,22 @@ import { Canvas } from "react-three-fiber";
 import "./App.css";
 import Scene from "./views/Scene";
 import Controls from "./components/Controls";
+import controlStore from "./zustand/controlStore";
 
 function App() {
-  const [moveLeft, setmoveLeft] = useState(false);
-  const [moveRight, setmoveRight] = useState(false);
-  const [zoomIn, setZoomIn] = useState(false);
-  const [zoomOut, setZoomOut] = useState(false);
-  const [moveForward, setmoveForward] = useState(false);
-  const [moveOut, setmoveOut] = useState(false);
-  const [moveTop, setmoveTop] = useState(false);
-  const [moveDown, setmoveDown] = useState(false);
-  // const [mouseLook, setmouseLook] = useState(false);
-  const [pointerLock, setPointerLock] = useState(false);
-  const [fPControl, setFpControl] = useState(false);
-  const [oPControl, setOpControl] = useState(true);
+  const {
+    setmoveLeft,
+    setmoveTop,
+    setmoveRight,
+    setmoveDown,
+    setmoveForward,
+    setmoveOut,
+    setZoomIn,
+    setZoomOut,
+    setFpControl,
+    setOpControl,
+    setPointerLock,
+  } = controlStore();
 
   return (
     <>
@@ -99,25 +101,9 @@ function App() {
         {/* <button onClick={() => setPointerLock(!pointerLock)}>GameMode</button> */}
       </div>
 
-      <Canvas
-        shadowMap={{ enabled: "true" }}
-        onClick={() => setPointerLock(!pointerLock)}
-      >
+      <Canvas shadowMap={{ enabled: "true" }} onClick={() => setPointerLock()}>
         <Scene />
-        <Controls
-          moveLeft={moveLeft}
-          moveRight={moveRight}
-          zoomIn={zoomIn}
-          zoomOut={zoomOut}
-          moveForward={moveForward}
-          moveOut={moveOut}
-          moveTop={moveTop}
-          moveDown={moveDown}
-          // mouseLook={mouseLook}
-          pointerLock={pointerLock}
-          fPControl={fPControl}
-          oPControl={oPControl}
-        />
+        <Controls />
       </Canvas>
     </>
   );

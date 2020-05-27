@@ -6,23 +6,28 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 
+import controlStore from "../zustand/controlStore";
+import cameraStore from "../zustand/cameraStore";
+
 extend({ OrbitControls, PointerLockControls, FirstPersonControls });
 
-function Controls({
-  zoomIn,
-  moveForward,
-  moveOut,
-  moveTop,
-  moveDown,
-  moveLeft,
-  moveRight,
-  zoomOut,
-  // mouseLook,
-  pointerLock,
-  oPControl,
-  fPControl,
-}) {
-  console.log("controls render");
+function Controls() {
+  // console.log("controls render");
+  const {
+    zoomIn,
+    moveForward,
+    moveOut,
+    moveTop,
+    moveDown,
+    moveLeft,
+    moveRight,
+    zoomOut,
+    // mouseLook,
+    pointerLock,
+    oPControl,
+    fPControl,
+  } = controlStore();
+  const { storedCamera, setCamera } = cameraStore();
 
   const {
     camera,
@@ -47,6 +52,7 @@ function Controls({
     if (oPControl) {
       controlsRef.current.enabled = oPControl;
     }
+    setCamera(camera);
 
     // controlsRef.current.target.set(0, 100, 100);
     // controlsRef.current.center = new THREE.Vector3(0, 100, 100);

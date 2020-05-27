@@ -4,13 +4,19 @@ import Room from "../components/Room";
 import { Color } from "three";
 import Bird2 from "../components/Bird2";
 import Car from "../components/Car";
+import cameraStore from "../zustand/cameraStore";
 
 function Scene() {
+  console.log("scene Render");
+
   const { scene, camera } = useThree();
   scene.background = new Color("lightblue");
+  const { storedCamera, setCamera } = cameraStore();
 
   const light = useRef();
   const light2 = useRef();
+
+  console.log(storedCamera);
   useEffect(() => {
     // light2.current.castShadow = true;
     // light2.current.target.position.set(-100, 0, 150);
