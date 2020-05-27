@@ -102,8 +102,10 @@ function App() {
       </div>
 
       <Canvas shadowMap={{ enabled: "true" }} onClick={() => setPointerLock()}>
-        <Scene />
-        <Controls />
+        <React.Suspense fallback={<mesh />}>
+          <Scene />
+          <Controls />
+        </React.Suspense>
       </Canvas>
     </>
   );

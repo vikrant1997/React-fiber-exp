@@ -16,7 +16,7 @@ const [controlStore] = create((set) => ({
   moveDown: false,
   pointerLock: false,
   fPControl: false,
-  oPControl: false,
+  oPControl: true,
   mouseLook: false,
 
   setmoveLeft: (value) => set((state) => ({ moveLeft: value })),

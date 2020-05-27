@@ -5,22 +5,14 @@ import { TextureLoader, RepeatWrapping } from "three";
 
 import WoodTextureURL from "../assets/hardwood_floor.jpg";
 import BrickTexture from "../assets/brick_texture.jpg";
-import GrassTextureUrl from "../assets/cloth.jpg";
+
 import RoofTextureUrl from "../assets/roof_texture.jpg";
 import Wall from "./Wall";
-function Room() {
+function Room({ position }) {
   // loading texture for the play area
 
-  const grassTexture = useLoader(TextureLoader, GrassTextureUrl);
-  grassTexture.wrapS = RepeatWrapping;
-  grassTexture.wrapT = RepeatWrapping;
-  grassTexture.offset.set(0, 0);
-  grassTexture.repeat.set(7, 10);
   const roofTexture = useLoader(TextureLoader, RoofTextureUrl);
-  grassTexture.wrapS = RepeatWrapping;
-  grassTexture.wrapT = RepeatWrapping;
-  grassTexture.offset.set(0, 0);
-  grassTexture.repeat.set(10, 10);
+
   const floorTexture = useLoader(TextureLoader, WoodTextureURL);
   floorTexture.wrapS = RepeatWrapping;
   floorTexture.wrapT = RepeatWrapping;
@@ -40,9 +32,10 @@ function Room() {
   return (
     <>
       {/* top shee */}
-      <object3D position={[0, distantceOrigin / 4, 0]} rotation={[0, 0, 0]}>
+      <group position={position}>
         {/* mesh for the playing area */}
         <Wall
+          position={[0, distantceOrigin / 4, 0]}
           length={wallHeight}
           breadth={0}
           height={wallHeight}
@@ -50,21 +43,11 @@ function Room() {
           castShadow={false}
           receiveShadow={true}
         />
-      </object3D>
-      {/* bottom grass */}
-      <object3D position={[0, -0.1, 0]} rotation={[0, 0, 0]}>
+
+        {/* bottom wall */}
+
         <Wall
-          length={1000}
-          breadth={0}
-          height={1000}
-          texture={grassTexture}
-          castShadow={false}
-          receiveShadow={true}
-        />
-      </object3D>
-      {/* bottom wall */}
-      <object3D position={[0, 0, 0]}>
-        <Wall
+          position={[0, 0, 0]}
           length={wallHeight}
           breadth={0}
           height={wallHeight}
@@ -72,9 +55,9 @@ function Room() {
           castShadow={false}
           receiveShadow={true}
         />
-      </object3D>
-      {/* left wall */}
-      {/* <object3D position={[-distantceOrigin / 2, distantceOrigin / 8, 0]}>
+
+        {/* left wall */}
+        {/* <object3D position={[-distantceOrigin / 2, distantceOrigin / 8, 0]}>
         <Wall
           length={0}
           breadth={wallHeight / 4}
@@ -82,9 +65,10 @@ function Room() {
           texture={wallTexture}
         />
       </object3D> */}
-      {/* right wall */}
-      <object3D position={[distantceOrigin / 2, distantceOrigin / 8, 0]}>
+        {/* right wall */}
+
         <Wall
+          position={[distantceOrigin / 2, distantceOrigin / 8, 0]}
           length={0}
           breadth={wallHeight / 4}
           height={wallHeight}
@@ -94,12 +78,11 @@ function Room() {
         />
 
         {/* top wall */}
-      </object3D>
 
-      {/* back wall */}
+        {/* back wall */}
 
-      <object3D position={[0, distantceOrigin / 8, distantceOrigin / 2]}>
         <Wall
+          position={[0, distantceOrigin / 8, distantceOrigin / 2]}
           length={wallHeight}
           breadth={wallHeight / 4}
           height={0}
@@ -107,10 +90,11 @@ function Room() {
           castShadow={true}
           receiveShadow={false}
         />
-      </object3D>
-      {/* front wall */}
-      <object3D position={[0, distantceOrigin / 8, -distantceOrigin / 2]}>
+
+        {/* front wall */}
+
         <Wall
+          position={[0, distantceOrigin / 8, -distantceOrigin / 2]}
           length={wallHeight}
           breadth={wallHeight / 4}
           height={0}
@@ -118,7 +102,7 @@ function Room() {
           castShadow={true}
           receiveShadow={false}
         />
-      </object3D>
+      </group>
     </>
   );
 }
