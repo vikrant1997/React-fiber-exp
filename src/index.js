@@ -5,22 +5,15 @@ import "./index.css";
 import { Provider, inject, observer } from "mobx-react";
 
 import ControlStore from "./mst/controlStore";
+import CameraStore from "./mst/cameraStore";
 import { getSnapshot } from "mobx-state-tree";
 
-const store = ControlStore.create();
-
-export const StoreContext = React.createContext();
+const controlStore = ControlStore.create();
+const cameraStore = CameraStore.create();
 
 ReactDOM.render(
-  <StoreContext.Provider value={store}>
-    <App store={store} />
-  </StoreContext.Provider>,
+  <Provider controlStore={controlStore} cameraStore={cameraStore}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
-
-// ReactDOM.render(
-//   <Provider store={controls}>
-//     <App />
-//   </Provider>,
-//   document.getElementById("root")
-// );

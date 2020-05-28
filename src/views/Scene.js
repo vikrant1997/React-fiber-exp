@@ -4,17 +4,17 @@ import Room from "../components/Room";
 import { Color, AxesHelper } from "three";
 import Bird2 from "../components/Bird2";
 import Car from "../components/Car";
-import cameraStore from "../zustand/cameraStore";
+// import cameraStore from "../zustand/cameraStore";
 
 import { CameraHelper } from "three";
 import Grass from "components/Grass";
 
-function Scene() {
+function Scene({ cameraStore }) {
   console.log("scene Render");
 
   const { scene, camera } = useThree();
   scene.background = new Color("lightblue");
-  const { storedCamera, setCamera } = cameraStore();
+  const { storedCamera, setCamera } = cameraStore;
 
   const light = useRef();
   const light2 = useRef();

@@ -1,6 +1,5 @@
 import { types } from "mobx-state-tree";
 
-// declaring the shape of a node with the type `Todo`
 const ControlStore = types
   .model({
     moveLeft: false,

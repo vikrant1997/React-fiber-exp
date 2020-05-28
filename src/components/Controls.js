@@ -6,12 +6,9 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 
-import controlStore from "../zustand/controlStore";
-import cameraStore from "../zustand/cameraStore";
-
 extend({ OrbitControls, PointerLockControls, FirstPersonControls });
 
-function Controls() {
+function Controls({ cameraStore, controlStore }) {
   // console.log("controls render");
   const {
     zoomIn,
@@ -26,8 +23,8 @@ function Controls() {
     pointerLock,
     oPControl,
     fPControl,
-  } = controlStore();
-  const { storedCamera, setCamera } = cameraStore();
+  } = controlStore;
+  const { storedCamera, setCamera } = cameraStore;
 
   const {
     camera,
@@ -158,5 +155,5 @@ function Controls() {
     </>
   );
 }
-
 export default Controls;
+// export default inject("store")(observer(Controls));
