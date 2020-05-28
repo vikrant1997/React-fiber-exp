@@ -8,6 +8,7 @@ import cameraStore from "../zustand/cameraStore";
 
 import { CameraHelper } from "three";
 import Grass from "components/Grass";
+import { Detailed } from "drei";
 
 function Scene() {
   console.log("scene Render");
@@ -75,6 +76,20 @@ function Scene() {
           <boxBufferGeometry attach="geometry" args={[2, 25, 25]} />
           <meshPhongMaterial attach="material" />
         </mesh> */}
+      <Detailed distances={[0, 50, 150]} position={[0, 100, 0]}>
+        <Plane args={[2, 2]} />
+        <Sphere>
+          <meshBasicMaterial attach="material" color="hotpink" />
+        </Sphere>
+        <mesh>
+          <icosahedronBufferGeometry attach="geometry" args={[10, 2]} />
+          <meshBasicMaterial attach="material" color="lightgreen" wireframe />
+        </mesh>
+        <mesh>
+          <icosahedronBufferGeometry attach="geometry" args={[10, 1]} />
+          <meshBasicMaterial attach="material" color="lightblue" wireframe />
+        </mesh>
+      </Detailed>
       <mesh
         position={[-20, 0, 150]}
         receiveShadow={true}
