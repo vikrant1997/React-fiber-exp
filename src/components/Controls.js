@@ -43,7 +43,7 @@ function Controls() {
   useEffect(() => {
     camera.position.set(0, 10, 100);
     camera.far = 20000;
-    console.log(camera.fov);
+    // console.log(camera.fov);
 
     setDefaultCamera(camera);
     if (fPControl) {

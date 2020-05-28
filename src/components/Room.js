@@ -40,7 +40,7 @@ function Room({ position }) {
           breadth={0}
           height={wallHeight}
           texture={roofTexture}
-          castShadow={false}
+          castShadow={true}
           receiveShadow={true}
         />
 
@@ -52,7 +52,7 @@ function Room({ position }) {
           breadth={0}
           height={wallHeight}
           texture={floorTexture}
-          castShadow={false}
+          castShadow={true}
           receiveShadow={true}
         />
 

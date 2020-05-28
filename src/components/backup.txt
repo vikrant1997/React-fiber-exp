@@ -1,23 +1,104 @@
-if (pointerControlsRef.current.isLocked) {
-  var time = performance.now();
-  var delta = (time - prevTime) / 1000;
+// const {
+        //   setmoveLeft,
+        //   setmoveTop,
+        //   setmoveRight,
+        //   setmoveDown,
+        //   setmoveForward,
+        //   setmoveOut,
+        //   setZoomIn,
+        //   setZoomOut,
+        //   setFpControl,
+        //   setOpControl,
+        //   setPointerLock,
+        // } = controlStore();
 
-  velocity.x -= velocity.x * 10.0 * delta;
-  velocity.z -= velocity.z * 10.0 * delta;
 
-  velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+<>
+<div className="controls">
+  <button
+    onMouseDown={() => setmoveTop(true)}
+    onMouseUp={() => setmoveTop(false)}
+  >
+    Up
+  </button>
 
-  // direction.z = Number(moveForward) - Number(moveBackward);
-  direction.x = Number(moveRight) - Number(moveLeft);
-  direction.normalize(); // this ensures consistent movements in all directions
+  <button
+    onMouseDown={() => setmoveLeft(true)}
+    onMouseUp={() => setmoveLeft(false)}
+  >
+    Left
+  </button>
+  <button
+    onMouseDown={() => setmoveRight(true)}
+    onMouseUp={() => setmoveRight(false)}
+  >
+    Right
+  </button>
 
-  // if (moveForward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
-  if (moveLeft || moveRight) velocity.x -= direction.x * 400.0 * delta;
+  <button
+    onMouseDown={() => setmoveDown(true)}
+    onMouseUp={() => setmoveDown(false)}
+  >
+    Down
+  </button>
 
-  pointerControlsRef.current.moveRight(-velocity.x * delta);
-  pointerControlsRef.current.moveForward(-velocity.z * delta);
+  <button
+    onMouseDown={() => setmoveForward(true)}
+    onMouseUp={() => setmoveForward(false)}
+  >
+    Forward
+  </button>
+  <button
+    onMouseDown={() => setmoveOut(true)}
+    onMouseUp={() => setmoveOut(false)}
+  >
+    Back
+  </button>
 
-  pointerControlsRef.current.getObject().position.y += velocity.y * delta; // new behavior
+  <button
+    onMouseDown={() => setZoomIn(true)}
+    onMouseUp={() => setZoomIn(false)}
+  >
+    Zoom In
+  </button>
+  <button
+    onMouseDown={() => setZoomOut(true)}
+    onMouseUp={() => setZoomOut(false)}
+  >
+    Zoom Out
+  </button>
+  <button
+    onClick={() => {
+      setFpControl(true);
+      setOpControl(false);
+    }}
+  >
+    FpControl
+  </button>
+  <button
+    onClick={() => {
+      setOpControl(true);
+      setFpControl(false);
+    }}
+  >
+    OpControl
+  </button>
+  {/* <button
+  onMouseDown={() => setmouseLook(true)}
+  onMouseUp={() => setmouseLook(false)}
+>
+  Disable Mouse
+</button> */}
+  {/* <button onClick={() => setPointerLock(!pointerLock)}>GameMode</button> */}
+</div>
 
-  prevTime = time;
-}
+<Canvas
+  shadowMap={{ enabled: "true" }}
+  onClick={() => setPointerLock()}
+>
+  <React.Suspense fallback={<mesh />}>
+    <Scene />
+    <Controls />
+  </React.Suspense>
+</Canvas>
+</>

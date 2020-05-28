@@ -19,7 +19,7 @@ function Scene() {
   const light = useRef();
   const light2 = useRef();
 
-  console.log(storedCamera);
+  // console.log(storedCamera);
 
   useEffect(() => {
     // light2.current.castShadow = true;
@@ -28,10 +28,10 @@ function Scene() {
 
     light.current.castShadow = true;
     light.current.shadow.camera.visible = false;
-    light.current.shadow.camera.far = 500;
-    light.current.shadow.camera.right = 200;
-    light.current.shadow.camera.left = -200;
-    light.current.shadow.camera.top = 200;
+    light.current.shadow.camera.far = 800;
+    light.current.shadow.camera.right = 300;
+    light.current.shadow.camera.left = -300;
+    light.current.shadow.camera.top = 400;
     light.current.target.position.set(100, 0, 0);
     light.current.shadow.camera.bottom = -100;
 
@@ -81,11 +81,7 @@ function Scene() {
         castShadow={true}
         scale={[1, 2, 1]}
       >
-        <boxBufferGeometry
-          attach="geometry"
-          args={[2, 50, 25]}
-          translate={(0, 100, 0)}
-        />
+        <boxBufferGeometry attach="geometry" args={[2, 50, 25]} />
         <meshPhongMaterial attach="material" />
       </mesh>
       {/* bottom grass */}
