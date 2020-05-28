@@ -3,7 +3,7 @@ import { values } from "mobx";
 
 const CameraStore = types
   .model({
-    camera: types.custom(),
+    camera: types.frozen(),
   })
   .actions((self) => ({
     setCamera: (value) => (self.camera = value),

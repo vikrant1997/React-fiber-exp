@@ -49,6 +49,8 @@ function Controls({ cameraStore, controlStore }) {
     if (oPControl) {
       controlsRef.current.enabled = oPControl;
     }
+    console.log(camera);
+
     setCamera(camera);
 
     // controlsRef.current.target.set(0, 100, 100);
