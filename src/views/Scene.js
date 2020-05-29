@@ -1,17 +1,17 @@
 import React, { useRef, useEffect } from "react";
 import { useThree, useFrame, useLoader } from "react-three-fiber";
 import Room from "../components/Room";
-import { Color, AxesHelper } from "three";
+import { Color, AxesHelper, CameraHelper } from "three";
 import Bird2 from "../components/Bird2";
 import Car from "../components/Car";
 import cameraStore from "../zustand/cameraStore";
 
-import { CameraHelper } from "three";
 import Grass from "components/Grass";
-import { Detailed } from "drei";
+import { Detailed, Sphere, Plane } from "drei";
 
 function Scene() {
   console.log("scene Render");
+  // console.log(Sphere);
 
   const { scene, camera } = useThree();
   scene.background = new Color("lightblue");
@@ -19,8 +19,7 @@ function Scene() {
 
   const light = useRef();
   const light2 = useRef();
-
-  console.log(storedCamera);
+  const car = useRef();
 
   useEffect(() => {
     // light2.current.castShadow = true;
@@ -39,6 +38,7 @@ function Scene() {
     scene.add(light.current.target);
     var axesHelper = new AxesHelper(1000);
     scene.add(axesHelper);
+
     //comment this if helper not required
     scene.add(new CameraHelper(light.current.shadow.camera));
   }, []);
@@ -77,18 +77,13 @@ function Scene() {
           <meshPhongMaterial attach="material" />
         </mesh> */}
       <Detailed distances={[0, 50, 150]} position={[0, 100, 0]}>
-        <Plane args={[2, 2]} />
-        <Sphere>
+        <Plane args={[10, 10]} />
+        <Sphere args={[20, 20, 20]}>
           <meshBasicMaterial attach="material" color="hotpink" />
         </Sphere>
-        <mesh>
-          <icosahedronBufferGeometry attach="geometry" args={[10, 2]} />
-          <meshBasicMaterial attach="material" color="lightgreen" wireframe />
-        </mesh>
-        <mesh>
-          <icosahedronBufferGeometry attach="geometry" args={[10, 1]} />
-          <meshBasicMaterial attach="material" color="lightblue" wireframe />
-        </mesh>
+        <Sphere args={[50, 50, 50]}>
+          <meshBasicMaterial attach="material" color="yellow" />
+        </Sphere>
       </Detailed>
       <mesh
         position={[-20, 0, 150]}
