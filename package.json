@@ -6,12 +6,17 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.6",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
     "drei": "^0.0.47",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-three-fiber": "^4.1.4",
     "three": "^0.116.1",
+    "typescript": "^3.9.3",
     "zustand": "^2.2.3"
   },
   "scripts": {

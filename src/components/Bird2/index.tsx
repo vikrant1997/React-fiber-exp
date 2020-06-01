@@ -9,7 +9,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { draco } from "drei";
 import url from "../assets/flamingo.glb";
 
-export default function Bird2(props) {
+const Bird2: React.FC = (props) => {
   const group = useRef();
   const mesh = useRef();
   const scene = useRef();
@@ -25,7 +25,7 @@ export default function Bird2(props) {
   useEffect(() => {
     mesh.current.scale.set(10, 10, 10);
 
-    actions.current = {
+    const actions.current = {
       KeyAction: mixer.clipAction(animations[0], mesh.current),
     };
     actions.current.KeyAction.play();
@@ -53,4 +53,5 @@ export default function Bird2(props) {
       {/* </scene> */}
     </group>
   );
-}
+};
+export default Bird2;

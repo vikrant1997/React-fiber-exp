@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useThree, useFrame, useLoader } from "react-three-fiber";
 import Room from "../components/Room";
 import { Color, AxesHelper, CameraHelper, SpriteMaterial } from "three";
-import Bird2 from "../components/Bird2";
+import Bird2 from "../components/Bird2/Bird2";
 import Car from "../components/Car";
 import cameraStore from "../zustand/cameraStore";
 

@@ -1,3 +1,10 @@
+.container {
+  /* backgroundColor: orange, */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row;
+}
 .content {
   /* font-size: 100px;
   color: greenyellow; */

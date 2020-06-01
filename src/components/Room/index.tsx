@@ -10,7 +10,11 @@ import RoofTextureUrl from "../../assets/roof_texture.jpg";
 import Wall from "../Wall";
 import { HTML } from "drei";
 import "./styles.css";
-function Room({ position }) {
+type OtherProps = {
+  position: THREE.Vector3;
+};
+
+const Room: React.FC<OtherProps> = ({ position }) => {
   // loading texture for the play area
 
   const roofTexture = useLoader(TextureLoader, RoofTextureUrl);
@@ -46,16 +50,8 @@ function Room({ position }) {
           // {...groupProps} // All THREE.Group props are valid
           // {...divProps} // All HTMLDivElement props are valid
         >
-          <div
-            style={{
-              // backgroundColor: "orange",
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-              flow: "row",
-            }}
-          >
-            <div class="content">Room</div>
+          <div className="container">
+            <div className="content">Room</div>
           </div>
         </HTML>
         {/* mesh for the playing area */}
@@ -130,6 +126,5 @@ function Room({ position }) {
       </group>
     </>
   );
-}
-
+};
 export default Room;

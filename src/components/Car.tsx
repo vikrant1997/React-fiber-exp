@@ -9,9 +9,9 @@ import * as THREE from "three";
 
 // import url from "../assets/pony_cartoon/scene.gltf";
 
-export default function Car(props) {
+const Car: React.FC = (props) => {
   const group = useRef();
-  const mesh_0 = useRef();
+  let mesh_0 = useRef();
 
   const secondGroup = useRef();
 
@@ -76,4 +76,4 @@ export default function Car(props) {
       />
     </group>
   );
-}
+};
