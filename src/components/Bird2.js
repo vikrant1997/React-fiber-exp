@@ -12,6 +12,7 @@ import url from "../assets/flamingo.glb";
 export default function Bird2(props) {
   const group = useRef();
   const mesh = useRef();
+  const scene = useRef();
   const { nodes, materials, animations } = useLoader(
     GLTFLoader,
     url,
@@ -24,7 +25,6 @@ export default function Bird2(props) {
   useEffect(() => {
     mesh.current.scale.set(10, 10, 10);
 
-    void mixer.clipAction(animations[0], mesh.current).play();
     actions.current = {
       KeyAction: mixer.clipAction(animations[0], mesh.current),
     };
@@ -33,13 +33,14 @@ export default function Bird2(props) {
   }, []);
 
   useFrame((state, delta) => {
-    // group.current.rotation.y += 0.01;
-    // Math.sin((delta * factor) / 2) * Math.cos((delta * factor) / 2) * 1.5;
+    // group.current.rotation.y += Math.sin(delta / 2) * Math.cos(delta / 2) * 1.5;
+
     mixer.update(delta);
   });
 
   return (
     <group ref={group} {...props} dispose={null}>
+      {/* <scene name="Scene" {...props} ref={scene}> */}
       <mesh
         ref={mesh}
         castShadow={true}
@@ -49,6 +50,7 @@ export default function Bird2(props) {
         morphTargetInfluences={nodes.Object_0.morphTargetInfluences}
         rotation={[Math.PI / 2, 0, 0]}
       ></mesh>
+      {/* </scene> */}
     </group>
   );
 }

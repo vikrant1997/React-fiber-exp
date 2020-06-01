@@ -11,6 +11,7 @@ import * as THREE from "three";
 
 export default function Car(props) {
   const group = useRef();
+  const mesh_0 = useRef();
 
   const secondGroup = useRef();
 
@@ -21,7 +22,12 @@ export default function Car(props) {
   );
 
   useEffect(() => {
+    console.log(mesh_0.current.geometry);
+
     var modifier = new SimplifyModifier();
+    // mesh_0.current.geometry = nodes.mesh_0.geometry;
+    // mesh_0.current.geometry = materials.Body_SG1;
+    mesh_0.current.geometry = modifier.modify(mesh_0.current.geometry, 1);
     var simplified = nodes.mesh_0.clone();
     simplified.material = materials.Body_SG1;
     simplified.geometry = nodes.mesh_0.geometry;
@@ -34,18 +40,6 @@ export default function Car(props) {
     // console.log(modifier.modify(simplified.geometry, 10));
 
     simplified.geometry = modifier.modify(simplified.geometry, 1700);
-    simplified.geometry.computeFaceNormals();
-    simplified.geometry.computeBoundingBox();
-    simplified.geometry.computeBoundingSphere();
-    // simplified.geometry.computeFlatVertexNormals();
-    // simplified.geometry.computeMorphNormals();
-    simplified.geometry.computeVertexNormals();
-    // simplified.geometry.computeFlatVertexNormals();
-    // simplified.geometry = nodes.mesh_0.geometry;
-    // simplified.material = materials.Body_SG1;
-    console.log(simplified.geometry);
-
-    // simplified.geometry = modifier.modify(simplified.geometry, 0);
 
     secondGroup.current.add(simplified);
   }, []);
@@ -55,6 +49,7 @@ export default function Car(props) {
       <group rotation={[-Math.PI / 2, 0, -Math.PI / 2]}>
         <group scale={[0.1, 0.1, 0.1]}>
           <mesh
+            ref={mesh_0}
             material={materials.Body_SG1}
             geometry={nodes.mesh_0.geometry}
             castShadow={true}

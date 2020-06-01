@@ -3,11 +3,13 @@ import { useLoader } from "react-three-fiber";
 
 import { TextureLoader, RepeatWrapping } from "three";
 
-import WoodTextureURL from "../assets/hardwood_floor.jpg";
-import BrickTexture from "../assets/brick_texture.jpg";
+import WoodTextureURL from "../../assets/hardwood_floor.jpg";
+import BrickTexture from "../../assets/brick_texture.jpg";
 
-import RoofTextureUrl from "../assets/roof_texture.jpg";
-import Wall from "./Wall";
+import RoofTextureUrl from "../../assets/roof_texture.jpg";
+import Wall from "../Wall";
+import { HTML } from "drei";
+import "./styles.css";
 function Room({ position }) {
   // loading texture for the play area
 
@@ -33,6 +35,29 @@ function Room({ position }) {
     <>
       {/* top shee */}
       <group position={position}>
+        <HTML
+          position={[0, distantceOrigin / 4, 0]}
+          prepend // Project content behind the canvas (default: false)
+          // center // Adds a -50%/-50% css transform (default: false)
+          fullscreen // Aligns to the upper-left corner, fills the screen (default:false)
+          scaleFactor={100} // Scales children if set to a number (default=undefined)
+          zIndexRange={[100, 0]} // Z-order range (default=[16777271, 0])
+          // portal={domnodeRef} // Reference to target container (default=undefined)
+          // {...groupProps} // All THREE.Group props are valid
+          // {...divProps} // All HTMLDivElement props are valid
+        >
+          <div
+            style={{
+              // backgroundColor: "orange",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              flow: "row",
+            }}
+          >
+            <div class="content">Room</div>
+          </div>
+        </HTML>
         {/* mesh for the playing area */}
         <Wall
           position={[0, distantceOrigin / 4, 0]}
