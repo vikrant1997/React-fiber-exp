@@ -27,21 +27,21 @@ export default function Car(props) {
     var modifier = new SimplifyModifier();
     // mesh_0.current.geometry = nodes.mesh_0.geometry;
     // mesh_0.current.geometry = materials.Body_SG1;
-    mesh_0.current.geometry = modifier.modify(mesh_0.current.geometry, 1);
-    var simplified = nodes.mesh_0.clone();
-    simplified.material = materials.Body_SG1;
-    simplified.geometry = nodes.mesh_0.geometry;
+    // mesh_0.current.geometry = modifier.modify(mesh_0.current.geometry, 1);
+    // var simplified = nodes.mesh_0.clone();
+    // simplified.material = materials.Body_SG1;
+    // simplified.geometry = nodes.mesh_0.geometry;
 
     // simplified.material.flatShading = true;
-    console.log(simplified.geometry);
+    // console.log(simplified.geometry);
 
     // var count = Math.floor(simplified.geometry.attributes.position.count * 0.1); // number of vertices to remove
     // console.log(count);
     // console.log(modifier.modify(simplified.geometry, 10));
 
-    simplified.geometry = modifier.modify(simplified.geometry, 1700);
+    // simplified.geometry = modifier.modify(simplified.geometry, 1700);
 
-    secondGroup.current.add(simplified);
+    // secondGroup.current.add(simplified);
   }, []);
 
   return (
@@ -68,12 +68,12 @@ export default function Car(props) {
           />
         </group>
       </group>
-      <group
+      {/* <group
         position={[0, 0, -50]}
         ref={secondGroup}
         rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
         scale={[0.1, 0.1, 0.1]}
-      />
+      /> */}
     </group>
   );
 }

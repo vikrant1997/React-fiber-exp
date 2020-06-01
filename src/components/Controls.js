@@ -42,7 +42,7 @@ function Controls() {
 
   useEffect(() => {
     camera.position.set(0, 10, 100);
-    camera.far = 20000;
+    camera.far = 200000;
     console.log(camera.fov);
 
     setDefaultCamera(camera);
@@ -144,7 +144,7 @@ function Controls() {
           minZoom={10}
           enabled={oPControl}
           // enablePan={true}
-          maxDistance={1000}
+          maxDistance={10000}
           minPolarAngle={0}
           maxPolarAngle={Math.PI / 2}
           zoomSpeed={0.5}

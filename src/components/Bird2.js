@@ -23,6 +23,7 @@ export default function Bird2(props) {
   const [mixer] = useState(() => new THREE.AnimationMixer());
 
   useEffect(() => {
+    scene.current.add(group);
     mesh.current.scale.set(10, 10, 10);
 
     actions.current = {
@@ -33,24 +34,24 @@ export default function Bird2(props) {
   }, []);
 
   useFrame((state, delta) => {
-    // group.current.rotation.y += Math.sin(delta / 2) * Math.cos(delta / 2) * 1.5;
+    group.current.rotation.y += Math.sin(delta / 2) * Math.cos(delta / 2) * 1.5;
 
     mixer.update(delta);
   });
 
   return (
     <group ref={group} {...props} dispose={null}>
-      {/* <scene name="Scene" {...props} ref={scene}> */}
-      <mesh
-        ref={mesh}
-        castShadow={true}
-        material={materials.Material_0_COLOR_0}
-        geometry={nodes.Object_0.geometry}
-        morphTargetDictionary={nodes.Object_0.morphTargetDictionary}
-        morphTargetInfluences={nodes.Object_0.morphTargetInfluences}
-        rotation={[Math.PI / 2, 0, 0]}
-      ></mesh>
-      {/* </scene> */}
+      <scene name="Scene" {...props} ref={scene}>
+        <mesh
+          ref={mesh}
+          castShadow={true}
+          material={materials.Material_0_COLOR_0}
+          geometry={nodes.Object_0.geometry}
+          morphTargetDictionary={nodes.Object_0.morphTargetDictionary}
+          morphTargetInfluences={nodes.Object_0.morphTargetInfluences}
+          rotation={[Math.PI / 2, 0, 0]}
+        ></mesh>
+      </scene>
     </group>
   );
 }

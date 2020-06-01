@@ -35,7 +35,7 @@ function Room({ position }) {
     <>
       {/* top shee */}
       <group position={position}>
-        <HTML
+        {/* <HTML
           position={[0, distantceOrigin / 4, 0]}
           prepend // Project content behind the canvas (default: false)
           // center // Adds a -50%/-50% css transform (default: false)
@@ -57,7 +57,7 @@ function Room({ position }) {
           >
             <div class="content">Room</div>
           </div>
-        </HTML>
+        </HTML> */}
         {/* mesh for the playing area */}
         <Wall
           position={[0, distantceOrigin / 4, 0]}

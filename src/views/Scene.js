@@ -8,6 +8,7 @@ import cameraStore from "../zustand/cameraStore";
 
 import Grass from "components/Grass";
 import { Detailed, Sphere, Plane, Shadow, softShadows, HTML } from "drei";
+import Temple from "../components/Temple";
 softShadows();
 
 function Scene() {
@@ -85,7 +86,7 @@ function Scene() {
         <boxBufferGeometry attach="geometry" args={[2, 25, 25]} />
         <meshPhongMaterial attach="material" />
       </mesh> */}
-
+      {/* 
       <Detailed distances={[0, 50, 150]} position={[0, 100, 0]}>
         <Plane args={[10, 10]} />
         <Sphere args={[20, 20, 20]}>
@@ -94,7 +95,7 @@ function Scene() {
         <Sphere args={[50, 50, 50]}>
           <meshBasicMaterial attach="material" color="yellow" />
         </Sphere>
-      </Detailed>
+      </Detailed> */}
       <group position={[-20, 40, 150]}>
         <mesh
           receiveShadow={true}
@@ -128,6 +129,7 @@ function Scene() {
 
       <Bird2 position={[-150, 50, 0]} />
       <Car position={[-100, 0, -150]} />
+      {/* <Temple /> */}
     </>
   );
 }
