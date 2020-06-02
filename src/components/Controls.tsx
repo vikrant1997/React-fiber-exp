@@ -1,3 +1,4 @@
+// @ts-ignore-file
 import React, { useRef, useEffect, useState } from "react";
 
 import { extend, useThree, useFrame } from "react-three-fiber";
@@ -8,11 +9,13 @@ import { PointerLockControls } from "three/examples/jsm/controls/PointerLockCont
 
 import controlStore from "../zustand/controlStore";
 import cameraStore from "../zustand/cameraStore";
+import { PerspectiveCamera } from "three";
 
 extend({ OrbitControls, PointerLockControls, FirstPersonControls });
 
 function Controls() {
   // console.log("controls render");
+
   const {
     zoomIn,
     moveForward,
@@ -33,24 +36,26 @@ function Controls() {
     camera,
     gl: { domElement },
     setDefaultCamera,
-    scene,
   } = useThree();
-
-  const controlsRef = useRef();
+  // @ts-ignore-start
+  const controlsRef = useRef<OrbitControls>();
   // const pointerControlsRef = useRef();
-  const firstPersonControlsRef = useRef();
+  const firstPersonControlsRef = useRef<FirstPersonControls>();
 
   useEffect(() => {
     camera.position.set(0, 10, 100);
     camera.far = 20000;
-    console.log(camera.fov);
+
+    camera.type = "PerspectiveCamera";
+
+    console.log(camera.type);
 
     setDefaultCamera(camera);
     if (fPControl) {
-      firstPersonControlsRef.current.enabled = fPControl;
+      firstPersonControlsRef.current!.enabled = fPControl;
     }
     if (oPControl) {
-      controlsRef.current.enabled = oPControl;
+      controlsRef.current!.enabled = oPControl;
     }
     setCamera(camera);
 
@@ -60,12 +65,16 @@ function Controls() {
 
   useFrame(() => {
     if (zoomIn) {
+      // @ts-ignore
       if (camera.fov > 10) {
+        // @ts-ignore
         camera.fov -= 1;
       }
     }
     if (zoomOut) {
+      // @ts-ignore
       if (camera.fov < 90) {
+        // @ts-ignore
         camera.fov += 1;
       }
     }
@@ -92,10 +101,10 @@ function Controls() {
       camera.position.y -= 10;
     }
     if (oPControl) {
-      controlsRef.current.update();
+      controlsRef.current!.update();
     }
     if (fPControl) {
-      firstPersonControlsRef.current.update(1);
+      firstPersonControlsRef.current!.update(1);
     }
     // if (mouseLook) {
     //   firstPersonControlsRef.current.activeLook = false;
@@ -117,6 +126,7 @@ function Controls() {
         args={[camera, domElement]}
       /> */}
       {fPControl ? (
+        // @ts-ignore
         <firstPersonControls
           ref={firstPersonControlsRef}
           args={[camera, domElement]}
@@ -135,7 +145,9 @@ function Controls() {
       ) : (
         <></>
       )}
+
       {oPControl ? (
+        // @ts-ignore
         <orbitControls
           ref={controlsRef}
           args={[camera, domElement]}
@@ -158,5 +170,5 @@ function Controls() {
     </>
   );
 }
-
+// @ts-ignore-end
 export default Controls;

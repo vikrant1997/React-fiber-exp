@@ -1,47 +1,48 @@
 import React, { useRef, useEffect } from "react";
 import { useLoader, useThree, extend } from "react-three-fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { draco } from "drei";
 import { SimplifyModifier } from "three/examples/jsm/modifiers/SimplifyModifier";
 import { Sphere, Plane } from "drei";
-import { Object3D } from "three";
+import { Object3D, Mesh, Group } from "three";
 import * as THREE from "three";
 
 // import url from "../assets/pony_cartoon/scene.gltf";
+type GLTFResult = GLTF & {
+  nodes: {
+    mesh_0: THREE.Mesh;
+    mesh_1: THREE.Mesh;
+    mesh_2: THREE.Mesh;
+    mesh_3: THREE.Mesh;
+  };
+  materials: {
+    Material_0_COLOR_0: THREE.MeshStandardMaterial;
+    Body_SG1: THREE.MeshStandardMaterial;
+    Ground_SG: THREE.MeshStandardMaterial;
+    Interior_SG: THREE.MeshStandardMaterial;
+    Windows_SG: THREE.MeshStandardMaterial;
+  };
+};
 
-const Car: React.FC = (props) => {
-  const group = useRef();
-  let mesh_0 = useRef();
+function Car(props: JSX.IntrinsicElements["group"]) {
+  const group = useRef<Group>();
+  const secondGroup = useRef<Group>();
+  const mesh_0 = useRef<Mesh>();
 
-  const secondGroup = useRef();
-
-  const { nodes, materials, animations } = useLoader(
+  const { nodes, materials, animations } = useLoader<GLTFResult>(
     GLTFLoader,
     `${process.env.PUBLIC_URL}/pony_cartoon/scene.gltf`,
     draco("/draco-gltf/")
   );
 
   useEffect(() => {
-    console.log(mesh_0.current.geometry);
+    console.log(nodes);
+
+    console.log(mesh_0.current!.geometry);
 
     var modifier = new SimplifyModifier();
-    // mesh_0.current.geometry = nodes.mesh_0.geometry;
-    // mesh_0.current.geometry = materials.Body_SG1;
-    mesh_0.current.geometry = modifier.modify(mesh_0.current.geometry, 1);
-    var simplified = nodes.mesh_0.clone();
-    simplified.material = materials.Body_SG1;
-    simplified.geometry = nodes.mesh_0.geometry;
 
-    // simplified.material.flatShading = true;
-    console.log(simplified.geometry);
-
-    // var count = Math.floor(simplified.geometry.attributes.position.count * 0.1); // number of vertices to remove
-    // console.log(count);
-    // console.log(modifier.modify(simplified.geometry, 10));
-
-    simplified.geometry = modifier.modify(simplified.geometry, 1700);
-
-    secondGroup.current.add(simplified);
+    mesh_0.current!.geometry = modifier.modify(mesh_0.current!.geometry, 1);
   }, []);
 
   return (
@@ -76,4 +77,5 @@ const Car: React.FC = (props) => {
       />
     </group>
   );
-};
+}
+export default Car;

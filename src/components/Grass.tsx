@@ -1,6 +1,6 @@
 import React from "react";
 import { useLoader } from "react-three-fiber";
-import Wall from "../components/Wall";
+import Wall from "./Wall";
 import { TextureLoader, RepeatWrapping } from "three";
 import GrassTextureUrl from "../assets/cloth.jpg";
 

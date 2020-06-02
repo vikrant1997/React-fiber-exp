@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Canvas } from "react-three-fiber";
 import "./App.css";
@@ -101,7 +101,7 @@ function App() {
         {/* <button onClick={() => setPointerLock(!pointerLock)}>GameMode</button> */}
       </div>
 
-      <Canvas shadowMap={{ enabled: "true" }} onClick={() => setPointerLock()}>
+      <Canvas shadowMap={{ enabled: true }} onClick={() => setPointerLock()}>
         <React.Suspense fallback={<mesh />}>
           <Scene />
           <Controls />

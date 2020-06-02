@@ -10,11 +10,11 @@ import RoofTextureUrl from "../../assets/roof_texture.jpg";
 import Wall from "../Wall";
 import { HTML } from "drei";
 import "./styles.css";
-type OtherProps = {
-  position: THREE.Vector3;
+type RoomProps = {
+  position: [number, number, number];
 };
 
-const Room: React.FC<OtherProps> = ({ position }) => {
+const Room: React.FC<RoomProps> = ({ position }) => {
   // loading texture for the play area
 
   const roofTexture = useLoader(TextureLoader, RoofTextureUrl);
@@ -97,8 +97,6 @@ const Room: React.FC<OtherProps> = ({ position }) => {
           castShadow={true}
           receiveShadow={false}
         />
-
-        {/* top wall */}
 
         {/* back wall */}
 

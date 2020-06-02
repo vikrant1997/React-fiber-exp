@@ -1,6 +1,16 @@
 import React from "react";
+import { Vector3, Texture } from "three";
+type WallProps = {
+  position: [number, number, number];
+  length: number;
+  breadth: number;
+  height: number;
+  texture: Texture;
+  receiveShadow: boolean;
+  castShadow: boolean;
+};
 
-function Wall({
+const Wall: React.FC<WallProps> = ({
   position,
   length,
   breadth,
@@ -8,7 +18,7 @@ function Wall({
   texture,
   receiveShadow,
   castShadow,
-}) {
+}) => {
   return (
     <mesh
       position={position}
@@ -19,12 +29,10 @@ function Wall({
       <meshLambertMaterial
         attach="material"
         // opacity={0}
-        roughness={0.4}
-        metalness={0}
-        bumpScale={1}
+
         map={texture}
       />
     </mesh>
   );
-}
+};
 export default Wall;

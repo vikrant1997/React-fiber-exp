@@ -1,4 +1,5 @@
 import create from "zustand";
+import { Camera } from "react-three-fiber";
 
 // const [useStore] = create(set => ({
 //     count: 0,
@@ -7,7 +8,7 @@ import create from "zustand";
 //   }))
 const [cameraStore] = create((set) => ({
   storedCamera: null,
-  setCamera: (value) => set((state) => ({ storedCamera: value })),
+  setCamera: (value: Camera) => set((state) => ({ storedCamera: value })),
 }));
 
 export default cameraStore;
