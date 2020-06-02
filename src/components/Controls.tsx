@@ -8,7 +8,6 @@ import { PointerLockControls } from "three/examples/jsm/controls/PointerLockCont
 
 import controlStore from "../zustand/controlStore";
 import cameraStore from "../zustand/cameraStore";
-import { PerspectiveCamera } from "three";
 
 extend({ OrbitControls, PointerLockControls, FirstPersonControls });
 
@@ -27,8 +26,6 @@ declare global {
   }
 }
 function Controls() {
-  // console.log("controls render");
-
   const {
     zoomIn,
     moveForward,
@@ -45,24 +42,16 @@ function Controls() {
   } = controlStore();
   const { storedCamera, setCamera } = cameraStore();
 
-  const {
-    // camera,
-    gl: { domElement },
-    setDefaultCamera,
-  } = useThree();
-  const camera = new PerspectiveCamera();
+  const { gl, setDefaultCamera } = useThree();
 
+  const camera = storedCamera;
   const controlsRef = useRef<OrbitControls>();
-  // const pointerControlsRef = useRef();
+
   const firstPersonControlsRef = useRef<FirstPersonControls>();
 
   useEffect(() => {
     camera.position.set(0, 10, 100);
     camera.far = 20000;
-
-    // camera.type = "PerspectiveCamera";
-
-    console.log(camera.fov);
 
     setDefaultCamera(camera);
     if (fPControl) {
@@ -71,35 +60,24 @@ function Controls() {
     if (oPControl) {
       controlsRef.current!.enabled = oPControl;
     }
-    setCamera(camera);
-
-    // controlsRef.current.target.set(0, 100, 100);
-    // controlsRef.current.center = new THREE.Vector3(0, 100, 100);
   }, [fPControl, oPControl]);
 
   useFrame(() => {
     if (zoomIn) {
-      // @ts-ignore
       if (camera.fov > 10) {
-        // @ts-ignore
         camera.fov -= 1;
       }
     }
     if (zoomOut) {
-      // @ts-ignore
       if (camera.fov < 90) {
-        // @ts-ignore
         camera.fov += 1;
       }
     }
     if (moveLeft) {
       camera.position.x -= 10;
-      // camera.translateX(-10);
     }
     if (moveRight) {
       camera.position.x += 10;
-      // camera.translateX(10);
-      // camera.translateY(10);
     }
     if (moveForward) {
       camera.position.z -= 10;
@@ -132,7 +110,6 @@ function Controls() {
     camera.updateProjectionMatrix();
   });
 
-  // return <></>;
   return (
     <>
       {/* <pointerLockControls
@@ -142,7 +119,7 @@ function Controls() {
       {fPControl ? (
         <firstPersonControls
           ref={firstPersonControlsRef}
-          args={[camera, domElement]}
+          args={[camera, gl.domElement]}
           // activeLook={true}
           // autoForward={true}
           // constrainVertical={true}
@@ -162,7 +139,7 @@ function Controls() {
       {oPControl ? (
         <orbitControls
           ref={controlsRef}
-          args={[camera, domElement]}
+          args={[camera, gl.domElement]}
           enableZoom={true}
           maxZoom={100}
           minZoom={10}

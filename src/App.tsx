@@ -5,6 +5,8 @@ import "./App.css";
 import Scene from "./views/Scene";
 import Controls from "./components/Controls";
 import controlStore from "./zustand/controlStore";
+import cameraStore from "./zustand/cameraStore";
+import Camera from "./components/Camera";
 
 function App() {
   const {

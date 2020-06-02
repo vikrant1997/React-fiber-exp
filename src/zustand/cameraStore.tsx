@@ -1,14 +1,16 @@
 import create from "zustand";
 import { Camera } from "react-three-fiber";
+import { PerspectiveCamera } from "three";
 
-// const [useStore] = create(set => ({
-//     count: 0,
-//     increase: () => set(state => ({ count: state.count + 1 })),
-//     reset: () => set({ count: 0 })
-//   }))
 const [cameraStore] = create((set) => ({
-  storedCamera: null,
-  setCamera: (value: Camera) => set((state) => ({ storedCamera: value })),
+  storedCamera: new PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    1,
+    10000
+  ),
+  setCamera: (value: PerspectiveCamera) =>
+    set((state) => ({ storedCamera: value })),
 }));
 
 export default cameraStore;

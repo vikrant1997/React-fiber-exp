@@ -37,9 +37,8 @@ function Bird2(props: JSX.IntrinsicElements["group"]) {
 
   useEffect(() => {
     mesh.current!.scale.set(10, 10, 10);
-    actions.current = {
-      KeyAction: mixer.clipAction(animations[0], group.current),
-    };
+
+    mixer.clipAction(animations[0], mesh.current).play();
     return () => animations.forEach((clip) => mixer.uncacheClip(clip));
   }, []);
 

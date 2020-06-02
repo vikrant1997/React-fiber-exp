@@ -28,10 +28,6 @@ function Scene() {
   const car = useRef();
 
   useEffect(() => {
-    // light2.current.castShadow = true;
-    // light2.current.target.position.set(-100, 0, 150);
-    // light2.current.shadow.camera.far = 150;
-
     light.current!.castShadow = true;
     light.current!.shadow.camera.visible = false;
     light.current!.shadow.camera.far = 500;

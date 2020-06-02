@@ -26,7 +26,6 @@ type GLTFResult = GLTF & {
 
 function Car(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<Group>();
-  const secondGroup = useRef<Group>();
   const mesh_0 = useRef<Mesh>();
 
   const { nodes, materials, animations } = useLoader<GLTFResult>(
@@ -36,13 +35,8 @@ function Car(props: JSX.IntrinsicElements["group"]) {
   );
 
   useEffect(() => {
-    console.log(nodes);
-
-    console.log(mesh_0.current!.geometry);
-
-    var modifier = new SimplifyModifier();
-
-    mesh_0.current!.geometry = modifier.modify(mesh_0.current!.geometry, 1);
+    // var modifier = new SimplifyModifier();
+    // mesh_0.current!.geometry = modifier.modify(mesh_0.current!.geometry, 1);
   }, []);
 
   return (
@@ -69,12 +63,6 @@ function Car(props: JSX.IntrinsicElements["group"]) {
           />
         </group>
       </group>
-      <group
-        position={[0, 0, -50]}
-        ref={secondGroup}
-        rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
-        scale={[0.1, 0.1, 0.1]}
-      />
     </group>
   );
 }
