@@ -1,7 +1,6 @@
-// @ts-ignore-file
 import React, { useRef, useEffect, useState } from "react";
 
-import { extend, useThree, useFrame } from "react-three-fiber";
+import { extend, useThree, useFrame, ReactThreeFiber } from "react-three-fiber";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
@@ -13,6 +12,20 @@ import { PerspectiveCamera } from "three";
 
 extend({ OrbitControls, PointerLockControls, FirstPersonControls });
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      orbitControls: ReactThreeFiber.Object3DNode<
+        OrbitControls,
+        typeof OrbitControls
+      >;
+      firstPersonControls: ReactThreeFiber.Object3DNode<
+        FirstPersonControls,
+        typeof FirstPersonControls
+      >;
+    }
+  }
+}
 function Controls() {
   // console.log("controls render");
 
@@ -33,11 +46,12 @@ function Controls() {
   const { storedCamera, setCamera } = cameraStore();
 
   const {
-    camera,
+    // camera,
     gl: { domElement },
     setDefaultCamera,
   } = useThree();
-  // @ts-ignore-start
+  const camera = new PerspectiveCamera();
+
   const controlsRef = useRef<OrbitControls>();
   // const pointerControlsRef = useRef();
   const firstPersonControlsRef = useRef<FirstPersonControls>();
@@ -46,9 +60,9 @@ function Controls() {
     camera.position.set(0, 10, 100);
     camera.far = 20000;
 
-    camera.type = "PerspectiveCamera";
+    // camera.type = "PerspectiveCamera";
 
-    console.log(camera.type);
+    console.log(camera.fov);
 
     setDefaultCamera(camera);
     if (fPControl) {
@@ -126,7 +140,6 @@ function Controls() {
         args={[camera, domElement]}
       /> */}
       {fPControl ? (
-        // @ts-ignore
         <firstPersonControls
           ref={firstPersonControlsRef}
           args={[camera, domElement]}
@@ -147,7 +160,6 @@ function Controls() {
       )}
 
       {oPControl ? (
-        // @ts-ignore
         <orbitControls
           ref={controlsRef}
           args={[camera, domElement]}
@@ -170,5 +182,5 @@ function Controls() {
     </>
   );
 }
-// @ts-ignore-end
+
 export default Controls;
