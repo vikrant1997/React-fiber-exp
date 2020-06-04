@@ -9,6 +9,8 @@ import cameraStore from "../zustand/cameraStore";
 import Grass from "components/Grass";
 import { Detailed, Sphere, Plane, Shadow, softShadows, HTML } from "drei";
 import Temple from "../components/Temple";
+import Terrain from "../components/Terrain";
+
 softShadows();
 
 function Scene() {
@@ -34,7 +36,7 @@ function Scene() {
     light.current.shadow.camera.right = 200;
     light.current.shadow.camera.left = -200;
     light.current.shadow.camera.top = 200;
-    light.current.target.position.set(100, 0, 0);
+    light.current.target.position.set(0, 50, 0);
     light.current.shadow.camera.bottom = -100;
 
     scene.add(light.current.target);
@@ -42,7 +44,7 @@ function Scene() {
     // scene.add(axesHelper);
 
     //comment this if helper not required
-    // scene.add(new CameraHelper(light.current.shadow.camera));
+    scene.add(new CameraHelper(light.current.shadow.camera));
   }, []);
   //comment this if helper not required
   // // scene.add(new CameraHelper(camera));
@@ -58,10 +60,24 @@ function Scene() {
   //   side: THREE.DoubleSide,
   //   transparent: true,
   // });
-
   return (
     <>
+      {/* <ambientLight /> */}
       <directionalLight
+        ref={light}
+        intensity={2}
+        position={[0, 50, 0]}
+        visible={true}
+        // castShadow={true}
+
+        // target={Room}
+      />
+      <Terrain position={[0, 0, 0]} />
+    </>
+  );
+  return (
+    <>
+      {/* <directionalLight
         ref={light}
         intensity={2}
         position={[-300, 200, 0]}
@@ -69,7 +85,7 @@ function Scene() {
         // castShadow={true}
 
         // target={Room}
-      />
+      /> */}
       {/* <pointLight
         ref={light2}
         intensity={3}
